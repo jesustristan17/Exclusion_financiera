@@ -9,11 +9,11 @@ modelo = joblib.load("modelo_exclusion_financiera.pkl")
 codificaciones = {
     "INGRESO_BINNED": {
         "Sin ingreso":5,
-        "Ingreso menor a 1,200 pesos)": 4,
-        "Ingreso entre 1,201 y 2,000 pesos)": 1,
-        "Ingreso entre 2,001 y 3,500 pesos)": 2,
-        "Ingreso entre 3,501 y 10,000 pesos)": 0,
-        "Ingreso superior a  10,000 pesos)": 3
+        "Ingreso menor a 1,200 pesos": 4,
+        "Ingreso entre 1,201 y 2,000 pesos": 1,
+        "Ingreso entre 2,001 y 3,500 pesos": 2,
+        "Ingreso entre 3,501 y 10,000 pesos": 0,
+        "Ingreso superior a  10,000 pesos": 3
     },
     "BAÑOS_BINNED": {
         "Sin baño": 4,
@@ -129,16 +129,16 @@ descripciones = {
     "RECHAZO_PRESTAMO": "¿Alguna vez te han rechazado una solicitud de préstamo?",
     "USO_SUCURSALES": "En el último año ¿has utilizado alguna sucursal de un banco o institución financiera?",
     "COMPRAS_INF_500": "Cuándo realizas compras menores a $500, ¿Con qué metodo las pagas?",
-    "STATUS_LABORAL": "Selecciona la opción que mejor describe tu situación laboral.",
+    "STATUS_LABORAL": "Selecciona la opción que mejor describe tu situación laboral actual.",
     "PAGOS_TARJETA": "En los lugares que regularmente compras, ¿En cuántos de ellos aceptan pago con tarjeta o transferencia?",
     "DOMICILIACION": "¿Tienes servicios como luz, agua o internet domiciliados a tu cuenta?",
     "OFRECIMIENTOS": "¿Has recibido ofertas de productos financieros (como tarjetas o seguros)?",
-    "TLOC": "Aproximadamente, cuantos habitantes tiene la localidad en la que actualmente vives",
-    "CELULAR": "¿Tienes acceso a un teléfono celular propio?",
+    "TLOC": "Aproximadamente, cuantos habitantes tiene el municipio en el que actualmente vives",
+    "CELULAR": "¿Tienes acceso a un teléfono inteligente?",
     "INTERNET": "¿Cuentas con acceso a internet en tu hogar o celular?",
     "CLONACION_TARJETAS": "¿Has experimentado clonación de tarjeta alguna vez?",
     "ENTIDAD": "Selecciona el estado o entidad federativa donde vives.",
-    "TIEMPO_AHORROS": "Si dejaras de recibir ingresos, ¿por cuánto tiempo podrías cubrir sus gastos con sus ahorros?",
+    "TIEMPO_AHORROS": "Si dejaras de recibir ingresos, ¿por cuánto tiempo podrías cubrir tus gastos con tus ahorros?",
     "BAÑOS_BINNED": "Número de baños disponibles en tu vivienda.",
     "PAGOS_DIGITALES": "¿Utilizas plataformas digitales para realizar pagos? (CODI, DIMO)",
     "USO_ALIANZAS": "En el último años, ¿has hecho pagos de servicios o depositos a cuentas en tiendas de conveniencia como Oxxo, 7-eleven o supermercados?"
