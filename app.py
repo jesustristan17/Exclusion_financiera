@@ -214,7 +214,7 @@ if st.button("Calcular probabilidad"):
     proba = modelo.predict_proba(df_input)[0][1]
     st.metric("Probabilidad de exclusión financiera", f"{proba:.2%}")
 
-    #  Interpretación por rangos
+    # Interpretación por rangos
     if proba <= 0.25:
         estado = "✅ No excluido"
         detalle = "Tu perfil muestra acceso financiero adecuado."
@@ -228,41 +228,42 @@ if st.button("Calcular probabilidad"):
         estado = "🔴 Alta exclusión financiera"
         detalle = "Tu perfil refleja una alta probabilidad de estar excluido del sistema financiero."
 
+    # Mostrar interpretación
     st.subheader("Interpretación")
     st.success(estado)
     st.write(detalle)
 
-# Acciones recomendadas para mejorar inclusión financiera
-st.markdown("### 🧭 ¿Qué puedes hacer para mejorar tu situación financiera?")
+    # Acciones recomendadas
+    st.markdown("### 🧭 ¿Qué puedes hacer para mejorar tu situación financiera?")
+    if proba <= 0.25:
+        st.markdown("""
+            Tu acceso financiero es adecuado. ¡Bien hecho!  
+            - Sigue usando los servicios que ya tienes (cuentas, cajeros, pagos digitales).
+            - Solo repite esta evaluación si cambias de trabajo, tus ingresos bajan o tu situación personal cambia.
+        """)
+    elif proba <= 0.50:
+        st.markdown("""
+            Estás en una etapa temprana de riesgo. Es buen momento para actuar:  
+            - Aprende más sobre cómo manejar tu dinero. Hay cursos gratuitos en línea y en tu comunidad.
+            - Si necesitas un préstamo, busca opciones que se puedan solicitar desde el celular, sin ir al banco.
+            - Usa cajeros automáticos cuando puedas, y si no hay cerca, pregunta por cajeros móviles o tiendas que den servicios financieros.
+            - Repite esta evaluación dentro de **1 año** para ver si has mejorado.
+        """)
+    elif proba <= 0.75:
+        st.markdown("""
+            Tienes acceso limitado a servicios financieros. Hay formas de avanzar:  
+            - Pregunta en tu trabajo o comunidad si hay programas para abrir cuentas bancarias básicas.
+            - Aprende a usar apps para pagar, ahorrar o enviar dinero. Muchas son fáciles y seguras.
+            - Busca cuentas que premien el uso digital (como no cobrar comisiones si usas la app).
+            - Repite esta evaluación dentro de **6 meses** para revisar tu progreso.
+        """)
+    else:
+        st.markdown("""
+            Tu situación muestra una alta exclusión financiera. No estás solo, y hay formas de empezar:  
+            - Acércate a programas sociales (educación, salud, empleo) que también ayudan a abrir cuentas bancarias.
+            - Pregunta por cuentas sin comisiones que se puedan abrir en persona, sin necesidad de internet.
+            - Si no tienes celular o internet, busca centros comunitarios donde puedas conectarte o recibir ayuda.
+            - Participa en talleres o apoyos para aprender sobre dinero, ahorro y pagos digitales.
+            - Repite esta evaluación dentro de **3 meses** para seguir tu avance.
+        """)
 
-if proba <= 0.25:
-    st.markdown("""
-        Tu acceso financiero es adecuado. ¡Bien hecho!  
-        - Sigue usando los servicios que ya tienes (cuentas, cajeros, pagos digitales).
-        - Solo repite esta evaluación si cambias de trabajo, tus ingresos bajan o tu situación personal cambia.
-        """)
-elif proba <= 0.50:
-    st.markdown("""
-        Estás en una etapa temprana de riesgo. Es buen momento para actuar:  
-        - Aprende más sobre cómo manejar tu dinero. Hay cursos gratuitos en línea y en tu comunidad.
-        - Si necesitas un préstamo, busca opciones que se puedan solicitar desde el celular, sin ir al banco.
-        - Usa cajeros automáticos cuando puedas, y si no hay cerca, pregunta por cajeros móviles o tiendas que den servicios financieros.
-        - Repite esta evaluación dentro de **1 año** para ver si has mejorado.
-        """)
-elif proba <= 0.75:
-    st.markdown("""
-        Tienes acceso limitado a servicios financieros. Hay formas de avanzar:  
-        - Pregunta en tu trabajo o comunidad si hay programas para abrir cuentas bancarias básicas.
-        - Aprende a usar apps para pagar, ahorrar o enviar dinero. Muchas son fáciles y seguras.
-        - Busca cuentas que premien el uso digital (como no cobrar comisiones si usas la app).
-        - Repite esta evaluación dentro de **6 meses** para revisar tu progreso.
-        """)
-else:
-    st.markdown("""
-        Tu situación muestra una alta exclusión financiera. No estás solo, y hay formas de empezar:  
-        - Acércate a programas sociales (educación, salud, empleo) que también ayudan a abrir cuentas bancarias.
-        - Pregunta por cuentas sin comisiones que se puedan abrir en persona, sin necesidad de internet.
-        - Si no tienes celular o internet, busca centros comunitarios donde puedas conectarte o recibir ayuda.
-        - Participa en talleres o apoyos para aprender sobre dinero, ahorro y pagos digitales.
-        - Repite esta evaluación dentro de **3 meses** para seguir tu avance.
-        """)
