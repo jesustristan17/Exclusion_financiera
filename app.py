@@ -228,9 +228,9 @@ if st.button("Calcular probabilidad"):
         estado = "🔴 Alta exclusión financiera"
         detalle = "Tu perfil refleja una alta probabilidad de estar excluido del sistema financiero."
 
-st.subheader("Interpretación")
-st.success(estado)
-st.write(detalle)
+    st.subheader("Interpretación")
+    st.success(estado)
+    st.write(detalle)
 
 # Acciones recomendadas para mejorar inclusión financiera
 st.markdown("### 🧭 ¿Qué puedes hacer para mejorar tu situación financiera?")
