@@ -24,14 +24,14 @@ codificaciones = {
     },
     "ESCOLARIDAD": {
         "Ninguno": 0,
-        "Preerscolar-Kinder": 1,
+        "Preescolar-Kinder": 1,
         "Primaria": 2,
-        "secundaria": 3,
+        "Secundaria": 3,
         "Normal básica": 4,
         "Preparatoria": 6,
         "Carrera técnica": 7,
         "Licenciatura": 8,
-        "Espacialidad": 9,
+        "Especialidad": 9,
         "Maestría": 10,
         "Doctorado": 11
     },
