@@ -2,10 +2,10 @@ import streamlit as st
 import pandas as pd
 import joblib
 
-# 🧠 Cargar modelo entrenado
+# Cargar modelo entrenado
 modelo = joblib.load("modelo_exclusion_financiera.pkl")
 
-# 📘 Codificaciones manuales
+# Codificaciones
 codificaciones = {
     "INGRESO_BINNED": {
         "Sin ingreso":5,
@@ -120,7 +120,7 @@ codificaciones = {
     }
 }
 
-# 🗒️ Descripciones de cada pregunta
+# 🗒Descripciones de cada pregunta
 descripciones = {
     "USO_ATM": "En el último año, ¿Has utilizado cajeros automáticos para retirar o consultar saldo?",
     "COMPRAS_SUP_500": "Cuándo realizas compras mayores a $500, ¿Con qué metodo las pagas?",
@@ -144,7 +144,7 @@ descripciones = {
     "USO_ALIANZAS": "En el último años, ¿has hecho pagos de servicios o depositos a cuentas en tiendas de conveniencia como Oxxo, 7-eleven o supermercados?"
 }
 
-# ✅ Orden de columnas según entrenamiento
+# Orden de columnas según entrenamiento
 orden_columnas = [
     "USO_ATM",
     "COMPRAS_SUP_500",
@@ -169,11 +169,11 @@ orden_columnas = [
 ]
 
 
-# ⚙️ Configuración de la app
+# ⚙Configuración de la app
 st.set_page_config(page_title="Evaluación Financiera", layout="centered")
 st.title("🔍 Evaluación de Exclusión Financiera")
 
-# 👤 Entrada de nombre
+# Entrada de nombre
 nombre_usuario = st.text_input(" Ingresa tu nombre ", "")
 if nombre_usuario:
     st.write(f"Hola, **{nombre_usuario}** 👋 Bienvenido a la evaluación de exclusión financiera.")
@@ -181,7 +181,7 @@ else:
     st.write("Bienvenido a la evaluación de exclusión financiera.")
 
 st.write("Completa el formulario para estimar tu probabilidad de exclusión del sistema financiero.")
-# 📋 Inputs categóricos codificados
+# Inputs categóricos codificados
 df_input = {}
 for var in orden_columnas:
     if var in codificaciones:
@@ -190,7 +190,7 @@ for var in orden_columnas:
         seleccion = st.selectbox("", list(codificaciones[var].keys()), key=var)
         df_input[var] = codificaciones[var][seleccion]
 
-# 📋 Inputs binarios tipo Sí/No
+# Inputs binarios tipo Sí/No
 binarios_si_no = [
     "USO_ATM", "USO_SUCURSALES",
     "DOMICILIACION", "OFRECIMIENTOS", "CELULAR", "INTERNET", "CLONACION_TARJETAS",
@@ -205,16 +205,16 @@ for var in binarios_si_no:
         valor = st.selectbox("", ["Sí", "No"], key=var)
         df_input[var] = 1 if valor == "Sí" else 0
 
-# 🧮 Construir DataFrame y asegurar orden correcto
+# Construir DataFrame y asegurar orden correcto
 df_input = pd.DataFrame([df_input])
 df_input = df_input[orden_columnas]
 
-# 📊 Predicción con interpretación de riesgo
+# Predicción con interpretación de riesgo y acciones
 if st.button("Calcular probabilidad"):
     proba = modelo.predict_proba(df_input)[0][1]
     st.metric("Probabilidad de exclusión financiera", f"{proba:.2%}")
 
-    # 🧠 Interpretación por rangos
+    #  Interpretación por rangos
     if proba <= 0.25:
         estado = "✅ No excluido"
         detalle = "Tu perfil muestra acceso financiero adecuado."
@@ -228,6 +228,41 @@ if st.button("Calcular probabilidad"):
         estado = "🔴 Alta exclusión financiera"
         detalle = "Tu perfil refleja una alta probabilidad de estar excluido del sistema financiero."
 
-    st.subheader("Interpretación")
+st.subheader("Interpretación")
     st.success(estado)
     st.write(detalle)
+
+    # 📌 Acciones recomendadas para mejorar inclusión financiera
+    st.markdown("### 🧭 ¿Qué puedes hacer para mejorar tu situación financiera?")
+
+    if proba <= 0.25:
+        st.markdown("""
+        Tu acceso financiero es adecuado. ¡Bien hecho!  
+        - Sigue usando los servicios que ya tienes (cuentas, cajeros, pagos digitales).
+        - Solo repite esta evaluación si cambias de trabajo, tus ingresos bajan o tu situación personal cambia.
+        """)
+    elif proba <= 0.50:
+        st.markdown("""
+        Estás en una etapa temprana de riesgo. Es buen momento para actuar:  
+        - Aprende más sobre cómo manejar tu dinero. Hay cursos gratuitos en línea y en tu comunidad.
+        - Si necesitas un préstamo, busca opciones que se puedan solicitar desde el celular, sin ir al banco.
+        - Usa cajeros automáticos cuando puedas, y si no hay cerca, pregunta por cajeros móviles o tiendas que den servicios financieros.
+        - Repite esta evaluación dentro de **1 año** para ver si has mejorado.
+        """)
+    elif proba <= 0.75:
+        st.markdown("""
+        Tienes acceso limitado a servicios financieros. Hay formas de avanzar:  
+        - Pregunta en tu trabajo o comunidad si hay programas para abrir cuentas bancarias básicas.
+        - Aprende a usar apps para pagar, ahorrar o enviar dinero. Muchas son fáciles y seguras.
+        - Busca cuentas que premien el uso digital (como no cobrar comisiones si usas la app).
+        - Repite esta evaluación dentro de **6 meses** para revisar tu progreso.
+        """)
+    else:
+        st.markdown("""
+        Tu situación muestra una alta exclusión financiera. No estás solo, y hay formas de empezar:  
+        - Acércate a programas sociales (educación, salud, empleo) que también ayudan a abrir cuentas bancarias.
+        - Pregunta por cuentas sin comisiones que se puedan abrir en persona, sin necesidad de internet.
+        - Si no tienes celular o internet, busca centros comunitarios donde puedas conectarte o recibir ayuda.
+        - Participa en talleres o apoyos para aprender sobre dinero, ahorro y pagos digitales.
+        - Repite esta evaluación dentro de **3 meses** para seguir tu avance.
+        """)
