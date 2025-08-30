@@ -120,7 +120,7 @@ codificaciones = {
     }
 }
 
-# 🗒Descripciones de cada pregunta
+# Descripciones de cada pregunta
 descripciones = {
     "USO_ATM": "En el último año, ¿Has utilizado cajeros automáticos para retirar o consultar saldo?",
     "COMPRAS_SUP_500": "Cuándo realizas compras mayores a $500, ¿Con qué metodo las pagas?",
