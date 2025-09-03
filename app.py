@@ -210,7 +210,7 @@ df_input = pd.DataFrame([df_input])
 df_input = df_input[orden_columnas]
 
 # Predicción con interpretación de riesgo y acciones
-if st.button("Calcular probabilidad´de exclusión"):
+if st.button("Calcular probabilidad de exclusión"):
     proba = modelo.predict_proba(df_input)[0][1]
     st.metric("Probabilidad de exclusión financiera", f"{proba:.2%}")
 
