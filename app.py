@@ -141,7 +141,7 @@ descripciones = {
     "TIEMPO_AHORROS": "Si dejaras de recibir ingresos, ¿por cuánto tiempo podrías cubrir tus gastos con tus ahorros?",
     "BAÑOS_BINNED": "Número de baños disponibles en tu vivienda.",
     "PAGOS_DIGITALES": "¿Utilizas plataformas digitales para realizar pagos? (CODI, DIMO)",
-    "USO_ALIANZAS": "En el último años, ¿has hecho pagos de servicios o depositos a cuentas en tiendas de conveniencia como Oxxo, 7-eleven o supermercados?"
+    "USO_ALIANZAS": "En el último año, ¿has hecho pagos de servicios o depositos a cuentas en tiendas de conveniencia como Oxxo, 7-eleven o supermercados?"
 }
 
 # Orden de columnas según entrenamiento
